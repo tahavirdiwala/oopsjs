@@ -1,0 +1,28 @@
+{
+  "name": "oopsjs",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "scripts": {
+    "start": "nodemon server.ts",
+    "dev": "nodemon -L server.ts ",
+    "build": "npm start build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.8.4",
+    "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
