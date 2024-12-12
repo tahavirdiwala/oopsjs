@@ -1,12 +1,15 @@
 import { getEnvConfig } from "../../utils/index";
 import { EnvironmentValues, EnvironmentKeys } from "../constant";
 
-const EnvironmentMapper = EnvironmentValues.reduce(
-    (acc, curr, index) => ({
-        ...acc,
-        [EnvironmentKeys[index]]: getEnvConfig(curr),
-    }),
-    {} as Record<"MongoUri" | "Port", string>
+const env = EnvironmentValues.reduce(
+  (acc, curr, index) => ({
+    ...acc,
+    [EnvironmentKeys[index]]: getEnvConfig(curr),
+  }),
+  {} as Record<
+    "MongoUri" | "Port" | "RoutePrefix" | "Controllers" | "Middlewares",
+    any
+  >
 );
 
-export { EnvironmentMapper }
+export { env };
