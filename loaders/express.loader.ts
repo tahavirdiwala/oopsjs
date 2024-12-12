@@ -1,16 +1,24 @@
+import "reflect-metadata";
 import { createExpressServer } from "routing-controllers";
 import { env } from "../lib/env";
 import { Application } from "express";
-import { getOsPaths } from "../utils";
+import { UserController } from "../controllers/user.controller";
+import { useContainer } from "routing-controllers";
+import { Container } from "typedi";
 
-const expressLoader: Application = createExpressServer({
-  cors: true,
-  classTransformer: true,
-  routePrefix: env.RoutePrefix,
-  defaultErrorHandler: false,
-  controllers: getOsPaths("Controllers"),
-  middlewares: getOsPaths("Middlewares"),
-  validation: { validationError: { target: false } },
+useContainer(Container);
+
+const app: Application = createExpressServer({
+    cors: true,
+    classTransformer: true,
+    routePrefix: env.RoutePrefix,
+    defaultErrorHandler: false,
+    controllers: [UserController],
+    validation: { validationError: { target: false } },
 });
 
-export { expressLoader };
+app.listen(env.Port, () => {
+    console.log("server is running at port " + env.Port);
+});
+
+export { app };

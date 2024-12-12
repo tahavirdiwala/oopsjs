@@ -7,7 +7,7 @@ const env = EnvironmentValues.reduce(
     [EnvironmentKeys[index]]: getEnvConfig(curr),
   }),
   {} as Record<
-    "MongoUri" | "Port" | "RoutePrefix" | "Controllers" | "Middlewares",
+    "MongoUri" | "Port" | "RoutePrefix",
     any
   >
 );
