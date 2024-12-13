@@ -1,4 +1,12 @@
-import { Body, Get, JsonController, Post, Res } from "routing-controllers";
+import {
+  Body,
+  Delete,
+  Get,
+  JsonController,
+  Param,
+  Post,
+  Res,
+} from "routing-controllers";
 import { UserService } from "../services/user.service";
 import { TUser } from "../types/user";
 import { Response } from "express";
@@ -40,6 +48,24 @@ export class UserController {
         StatusCodes.OK,
         "Users fetched successfully",
         users
+      );
+    } catch (error) {
+      return this.responser.sendResponse(
+        res,
+        StatusCodes.BAD_REQUEST,
+        error as Error
+      );
+    }
+  }
+
+  @Delete("/:id")
+  async delete(@Param("id") id: string, @Res() res: Response) {
+    try {
+      await this.userService.deleteUser(id);
+      return this.responser.sendResponse(
+        res,
+        StatusCodes.OK,
+        "User deleted successfully"
       );
     } catch (error) {
       return this.responser.sendResponse(
