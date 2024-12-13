@@ -9,4 +9,10 @@ export class UserService {
       User.create(userData).then(resolve).catch(reject);
     });
   }
+
+  async getAllUsers() {
+    return new Promise((resolve, reject) => {
+      User.find().then(resolve).catch(reject);
+    });
+  }
 }

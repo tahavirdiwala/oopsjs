@@ -16,11 +16,15 @@ const EnvironmentKeys = [
   "MongoUri",
   "Port",
   "RoutePrefix",
-];
+  "Controllers",
+  "Middlewares",
+] as const;
 const EnvironmentValues = [
   "MONGO_URL",
   "PORT",
   "PREFIX",
+  "Controllers",
+  "Middlewares",
 ];
 
 export { StatusCodes, EnvironmentKeys, EnvironmentValues };
