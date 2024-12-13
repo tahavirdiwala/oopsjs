@@ -1,12 +1,15 @@
 import { Response } from "express";
 
-export class ResponseHandlers {
+class ResponseHandlers {
   sendResponse<T>(
     res: Response,
     statusCode: number,
-    message: string | Error,
+    dispatch: string | Error,
     data?: T
   ) {
-    return res.status(statusCode).json({ statusCode, message, data });
+    if (dispatch instanceof Error) dispatch = dispatch['message'];
+    return res.status(statusCode).json({ statusCode, message: dispatch, data });
   }
 }
+
+export { ResponseHandlers }

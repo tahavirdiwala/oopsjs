@@ -10,9 +10,9 @@ export class UserService {
     });
   }
 
-  async getAllUsers() {
+  async getAllUsers(queryFilter: TUser) {
     return new Promise((resolve, reject) => {
-      User.find().then(resolve).catch(reject);
+      User.find(queryFilter).then(resolve).catch(reject);
     });
   }
 }

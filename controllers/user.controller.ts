@@ -1,4 +1,4 @@
-import { Body, Get, JsonController, Post, Res } from "routing-controllers";
+import { Body, Get, JsonController, Post, QueryParams, Res } from "routing-controllers";
 import { UserService } from "../services/user.service";
 import { TUser } from "../types/user";
 import { Response } from "express";
@@ -10,12 +10,12 @@ export class UserController {
   constructor(
     private userService: UserService,
     private responser: ResponseHandlers
-  ) {}
+  ) { }
 
   @Post("/")
-  async create(@Body() user: TUser, @Res() res: Response) {
+  async create(@Body() payload: TUser, @Res() res: Response) {
     try {
-      const data = await this.userService.createUser(user);
+      const data = await this.userService.createUser(payload);
       return this.responser.sendResponse(
         res,
         StatusCodes.CREATED,
@@ -32,9 +32,9 @@ export class UserController {
   }
 
   @Get("/")
-  async getAll(@Res() res: Response) {
+  async getAll(@QueryParams() queryFilter: TUser, @Res() res: Response) {
     try {
-      const users = await this.userService.getAllUsers();
+      const users = await this.userService.getAllUsers(queryFilter);
       return this.responser.sendResponse(
         res,
         StatusCodes.OK,
