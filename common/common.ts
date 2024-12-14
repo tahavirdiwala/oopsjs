@@ -4,11 +4,11 @@ class ResponseHandlers {
   sendResponse<T>(
     res: Response,
     statusCode: number,
-    dispatch: string | Error,
+    message: string | Error,
     data?: T
   ) {
-    if (dispatch instanceof Error) dispatch = dispatch['message'];
-    return res.status(statusCode).json({ statusCode, message: dispatch, data });
+    if (message instanceof Error) message = message['message'];
+    return res.status(statusCode).json({ statusCode, message, data });
   }
 }
 

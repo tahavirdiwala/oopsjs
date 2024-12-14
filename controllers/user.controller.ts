@@ -1,4 +1,4 @@
-import { Body, Get, JsonController, Post, QueryParams, Res } from "routing-controllers";
+import { Body, Get, JsonController, Param, Post, QueryParams, Res } from "routing-controllers";
 import { UserService } from "../services/user.service";
 import { TUser } from "../types/user";
 import { Response } from "express";
@@ -47,6 +47,16 @@ export class UserController {
         StatusCodes.BAD_REQUEST,
         error as Error
       );
+    }
+  }
+
+  @Get("/:id")
+  async get(@Param("id") id: string, @Res() res: Response) {
+    try {
+      const data = await this.userService.getUser(id);
+      return this.responser.sendResponse(res, StatusCodes.OK, "User fetched successfully", data);
+    } catch (error) {
+      return this.responser.sendResponse(res, StatusCodes.BAD_REQUEST, error as Error);
     }
   }
 }

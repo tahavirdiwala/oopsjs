@@ -15,4 +15,10 @@ export class UserService {
       User.find(queryFilter).then(resolve).catch(reject);
     });
   }
+
+  async getUser(_id: string) {
+    return new Promise((resolve, reject) => {
+      User.findOne({ _id }).then(resolve).catch(reject);
+    })
+  }
 }
