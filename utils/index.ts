@@ -18,9 +18,7 @@ function getPath(path: string): string {
 }
 
 function getPaths(paths: string[]): string[] {
-  return paths.map((p) => {
-    return getPath(p);
-  });
+  return paths.map(p => getPath(p));
 }
 
 function getOsPaths(key: string): string[] {
