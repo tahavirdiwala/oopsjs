@@ -13,7 +13,7 @@ class ResponseHandlers {
 
   catchHandler(dispatch: string | Error, statusCode: number = StatusCodes.BAD_REQUEST) {
     if (dispatch instanceof Error) dispatch = dispatch.message
-    throw new customError(statusCode, dispatch)
+    throw new customError(statusCode, dispatch);
   }
 
   apiResponser<T>(res: Response, data?: T) {
