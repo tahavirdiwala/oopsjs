@@ -1,10 +1,9 @@
 type TUser = {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phoneNo: string;
-  address: string;
-  user_type: string;
+  password: string
 };
 
 export { TUser };

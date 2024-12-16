@@ -8,7 +8,7 @@ const env = EnvironmentValues.reduce(
     ...acc,
     [EnvironmentKeys[index]]: getEnvConfig(curr),
   }),
-  {} as Record<Keys, any>
+  {} as Record<Keys, string>
 );
 
 export { env };
