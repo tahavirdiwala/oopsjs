@@ -1,6 +1,6 @@
 import { JsonController, Res } from "routing-controllers";
-import { UserService } from "../../services/user/user.service";
-import { ResponseHandlers } from "../../common/common";
+import { UserService } from "../services/user/user.service";
+import { ResponseHandlers } from "../common/common";
 import { Response } from "express";
 
 @JsonController("/users")
