@@ -6,8 +6,9 @@ import {
   MicroframeworkLoader,
   MicroframeworkSettings,
 } from "microframework-w3tec";
-import express from "express";
 import { getOsPaths } from "../utils";
+import { AuthController } from "../controllers/auth/auth.controller";
+import { UserController } from "../controllers/user/user.controller";
 
 const expressLoader: MicroframeworkLoader = (
   settings: MicroframeworkSettings | undefined
@@ -22,12 +23,11 @@ const expressLoader: MicroframeworkLoader = (
       classTransformer: true,
       routePrefix: env.RoutePrefix,
       defaultErrorHandler: false,
-      controllers: getOsPaths("Controllers"),
-      middlewares: getOsPaths("Middlewares"),
+      controllers: [AuthController, UserController],
+      // controllers: getOsPaths("Controllers"),
+      // middlewares: getOsPaths("Middlewares"),
       validation: { validationError: { target: false } },
     });
-
-    app.use(express.json());
 
     const server = app.listen(env.Port);
     settings.setData("express_server", server);

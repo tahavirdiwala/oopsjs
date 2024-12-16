@@ -1,14 +1,23 @@
+import { StatusCodes } from "../lib/constant";
+import { customError } from "../exception";
 import { Response } from "express";
 
 class ResponseHandlers {
   sendResponse<T>(
-    res: Response,
-    statusCode: number,
-    message: string | Error,
+    message: string,
+    statusCode: number = StatusCodes.OK,
     data?: T
   ) {
-    if (message instanceof Error) message = message['message'];
-    return res.status(statusCode).json({ statusCode, message, data });
+    return { statusCode, message, data };
+  }
+
+  catchHandler(dispatch: string | Error, statusCode: number = StatusCodes.BAD_REQUEST) {
+    if (dispatch instanceof Error) dispatch = dispatch.message
+    throw new customError(statusCode, dispatch)
+  }
+
+  apiResponser<T>(res: Response, data?: T) {
+    return res.json(data).end();
   }
 }
 
