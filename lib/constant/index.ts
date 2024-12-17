@@ -34,6 +34,6 @@ const environmentValues = [
   "Middlewares",
   "JWT_EXPIRE",
   "JWT_SECRET",
-] as const;
+];
 
 export { StatusCodes, PassWordConfig, environmentKeys, environmentValues };
