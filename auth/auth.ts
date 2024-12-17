@@ -1,5 +1,5 @@
 import { Response, NextFunction } from "express";
-import jwt, { Jwt, JwtPayload, VerifyErrors } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { env } from "../lib/env";
 
 function authMiddleware() {
