@@ -6,11 +6,11 @@ import { PassWordConfig, StatusCodes } from "../../lib/constant";
 import { env } from "../../lib/env";
 import { createTokenFor } from "../../auth/jwt";
 import { Response } from "express";
-import { Responser } from "../responser/response-handlers";
+import { ResponseHandlers } from "../responser/response-handlers";
 
 @Service()
 export class AuthService {
-  constructor(private responser: Responser) {}
+  constructor(private responser: ResponseHandlers) {}
 
   async registerUser(payload: TUser) {
     try {

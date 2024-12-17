@@ -2,7 +2,7 @@ import { StatusCodes } from "../../lib/constant";
 import { Response } from "express";
 import { CustomError } from "./custom-error.service";
 
-class Responser {
+class ResponseHandlers {
   sendResponse<T>(
     message: string,
     statusCode: number = StatusCodes.OK,
@@ -20,10 +20,10 @@ class Responser {
   }
 }
 
-class ResponseHandler {
-  apiResponser<T>(res: Response, data?: T) {
+class ApiResponser {
+  responser<T>(res: Response, data?: T) {
     return res.json(data).end();
   }
 }
 
-export { Responser, ResponseHandler };
+export { ResponseHandlers, ApiResponser };
