@@ -1,6 +1,6 @@
-import { Body, JsonController, Post, Res } from "routing-controllers";
+import { Body, Get, JsonController, Post, Res } from "routing-controllers";
 import { AuthService } from "../../services/auth/auth.service";
-import { Response } from "express";
+import { Request, Response } from "express";
 import { TUser } from "../../types/user";
 import { ResponseHandlers } from "../../services/responser/response-handlers";
 
@@ -14,9 +14,15 @@ export class AuthController {
     return this.responser.apiResponser(res, data);
   }
 
-  @Post("/login")
+  @Post("/")
   async login(@Res() res: Response, @Body() payload: TUser) {
     const data = await this.auth.loginUser(res, payload);
+    return this.responser.apiResponser(res, data);
+  }
+
+  @Get("/")
+  async logout(@Res() res: Response) {
+    const data = await this.auth.logOut(res);
     return this.responser.apiResponser(res, data);
   }
 }

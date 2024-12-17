@@ -43,19 +43,20 @@ export class AuthService extends ResponseHandlers {
         const validPassword = await compare(payload.password, user.password);
 
         if (validPassword) {
-          const withExpiry = env.JwtExpiry;
+          const { password, ...currentUser } = user.toJSON();
 
-          const token = createTokenFor(user.toJSON(), withExpiry);
+          const withExpiry = env.JwtExpiry;
+          const token = createTokenFor(currentUser, withExpiry);
 
           res.cookie("jwt", token, {
-            maxAge: 12 * 60 * 60 * 1000,
+            maxAge: 12 * 60 * 60 * 1000, // 1 day
             httpOnly: true,
           });
 
           return this.sendResponse(
             "User login successfully",
             StatusCodes.OK,
-            user
+            currentUser
           );
         } else {
           return this.catchHandler("Password is incorrect");
@@ -63,6 +64,15 @@ export class AuthService extends ResponseHandlers {
       } else {
         return this.catchHandler("User does not exist please register");
       }
+    } catch (error) {
+      return this.catchHandler(error as Error);
+    }
+  }
+
+  async logOut(res: Response) {
+    try {
+      res.clearCookie("jwt");
+      return this.sendResponse("User logout successfully");
     } catch (error) {
       return this.catchHandler(error as Error);
     }

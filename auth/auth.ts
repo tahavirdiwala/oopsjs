@@ -1,32 +1,33 @@
 import { Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import jwt, { Jwt, JwtPayload, VerifyErrors } from "jsonwebtoken";
 import { env } from "../lib/env";
 
-function checkUserAuthentication(req: any, res: Response, next: NextFunction) {
-  const token = req.cookies.jwt;
+function authMiddleware() {
+  return (req: any, res: Response, next: NextFunction) => {
+    const authHeader = req.headers["cookie"];
+    const token = authHeader?.split("=")[1];
 
-  if (token) {
-    jwt.verify(token, env.JwtSecret, (error: any, tokenResponse: any) => {
-      if (error) {
-        if (error.name === "TokenExpiredError") {
-          throw new Error("Unauthorized - Token has expired");
+    if (token) {
+      jwt.verify(token, env.JwtSecret, (error: any, tokenResponse: any) => {
+        if (error) {
+          if (error.name === "TokenExpiredError") {
+            throw new Error("Unauthorized - Token has expired");
+          } else {
+            throw new Error("Unauthorized - " + error.message);
+          }
         } else {
-          throw new Error("Unauthorized - " + error.message);
+          req.user = {
+            _id: tokenResponse._id,
+            name: tokenResponse.name,
+            email: tokenResponse.email,
+          };
         }
-      } else {
-        console.log("tokenResponse", tokenResponse);
-
-        req.user = {
-          _id: tokenResponse._id,
-          name: tokenResponse.name,
-          email: tokenResponse.email,
-        };
-      }
-    });
-  } else {
-    throw new Error("Unauthorized - Session has expired please login again");
-  }
-  next();
+      });
+    } else {
+      throw new Error("Unauthorized - Session has expired please login again");
+    }
+    return next();
+  };
 }
 
-export { checkUserAuthentication };
+export { authMiddleware };

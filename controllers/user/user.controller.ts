@@ -1,7 +1,8 @@
-import { Get, JsonController, Res } from "routing-controllers";
+import { Get, JsonController, Res, UseBefore } from "routing-controllers";
 import { UserService } from "../../services/user/user.service";
 import { ResponseHandlers } from "../../services/responser/response-handlers";
 import { Response } from "express";
+import { authMiddleware } from "../../auth/auth";
 
 @JsonController("/users")
 export class UserController {
@@ -11,6 +12,7 @@ export class UserController {
   ) {}
 
   @Get("/")
+  @UseBefore(authMiddleware())
   async getAll(@Res() res: Response) {
     const data = await this.userService.getAllUsers();
     return this.responser.apiResponser(res, data);
