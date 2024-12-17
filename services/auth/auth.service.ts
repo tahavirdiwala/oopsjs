@@ -1,10 +1,10 @@
 import { Service } from "typedi";
-import { TUser } from "../../types/user";
+import { TUser, TUserChangePassword } from "../../types/user";
 import User from "../../models/user.model";
 import bcrypt, { compare } from "bcryptjs";
 import { PassWordConfig, StatusCodes } from "../../lib/constant";
 import { env } from "../../lib/env";
-import { createTokenFor } from "../../auth/jwt";
+import { createTokenFor, hashField } from "../../auth/jwt";
 import { Response } from "express";
 import { ResponseHandlers } from "../responser/response-handlers";
 import { ResponseMessages } from "../../lib/constant/messages";
@@ -78,6 +78,32 @@ export class AuthService {
     try {
       res.clearCookie("jwt");
       return this.handler.sendResponse(this.messages.logout);
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
+  async changePassword(payload: TUserChangePassword) {
+    try {
+      const user = await User.findOne({ email: payload.email });
+      if (user) {
+        const validPassword = await compare(
+          payload.currentPassword,
+          user.password
+        );
+        if (validPassword) {
+          const hashedPassword = await hashField(payload.newPassword);
+          await User.updateOne(
+            { email: payload.email },
+            { password: hashedPassword }
+          );
+          return this.handler.sendResponse("Password change successfully");
+        } else {
+          return this.handler.catchHandler("Current password does not match");
+        }
+      } else {
+        return this.handler.catchHandler("User not found please register");
+      }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }

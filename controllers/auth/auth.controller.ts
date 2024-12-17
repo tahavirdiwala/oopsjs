@@ -3,6 +3,7 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Response } from "express";
 import { TUser } from "../../types/user";
 import { ApiResponser } from "../../services/responser/response-handlers";
+import { UserChangePasswordValidation } from "../../utils/validators/auth/auth.validator";
 
 @JsonController("/auth")
 export class AuthController {
@@ -23,6 +24,15 @@ export class AuthController {
   @Get("/")
   async logout(@Res() res: Response) {
     const data = await this.auth.logOut(res);
+    return this.handler.responser(res, data);
+  }
+
+  @Post("/change-password")
+  async changePassword(
+    @Body() payload: UserChangePasswordValidation,
+    @Res() res: Response
+  ) {
+    const data = await this.auth.changePassword(payload);
     return this.handler.responser(res, data);
   }
 }

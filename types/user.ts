@@ -8,4 +8,10 @@ type TUser = Document & {
   password: string;
 };
 
-export { TUser };
+type TUserChangePassword = {
+  email: string;
+  currentPassword: string;
+  newPassword: string;
+};
+
+export { TUser, TUserChangePassword };

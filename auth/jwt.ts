@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { env } from "../lib/env";
+import bcrypt from "bcryptjs";
+import { PassWordConfig } from "../lib/constant";
 
 /**
  * Sets a jwt response for given user.
@@ -12,6 +14,10 @@ const createTokenFor = (user: object, expiry: string) => {
   });
 };
 
+const hashField = async (password: string) => {
+  return await bcrypt.hash(password, PassWordConfig.Range);
+};
+
 function verifyToken(token: string): any {
   try {
     return jwt.verify(token, env.JwtSecret);
@@ -20,4 +26,4 @@ function verifyToken(token: string): any {
   }
 }
 
-export { createTokenFor, verifyToken };
+export { createTokenFor, verifyToken, hashField };
