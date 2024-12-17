@@ -18,7 +18,7 @@ function authMiddleware() {
         } else {
           req.user = {
             _id: tokenResponse._id,
-            name: tokenResponse.name,
+            firstName: tokenResponse.firstName,
             email: tokenResponse.email,
           };
         }

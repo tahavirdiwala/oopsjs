@@ -1,9 +1,11 @@
 import { Request } from "express";
 
-export interface IUserAuthRequest extends Request {
+interface IUserAuthRequest extends Request {
   user: {
     _id: string;
-    name: string;
+    firstName: string;
     email: string;
   };
 }
+
+export { IUserAuthRequest };
