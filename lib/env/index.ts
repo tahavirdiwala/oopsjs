@@ -1,12 +1,12 @@
 import { getEnvConfig } from "../../utils/index";
-import { EnvironmentValues, EnvironmentKeys } from "../constant";
+import { environmentValues, environmentKeys } from "../constant";
 
-type Keys = (typeof EnvironmentKeys)[number];
+type Keys = (typeof environmentKeys)[number];
 
-const env = EnvironmentValues.reduce(
+const env = environmentValues.reduce(
   (acc, curr, index) => ({
     ...acc,
-    [EnvironmentKeys[index]]: getEnvConfig(curr),
+    [environmentKeys[index]]: getEnvConfig(curr),
   }),
   {} as Record<Keys, string>
 );
