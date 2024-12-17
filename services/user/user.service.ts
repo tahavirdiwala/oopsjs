@@ -7,11 +7,12 @@ import { ResponseMessages } from "../../lib/constant/messages";
 
 @Service()
 export class UserService {
-  constructor(private handler: ResponseHandlers) {}
+  constructor(private handler: ResponseHandlers) { }
   private messages = ResponseMessages.user;
 
   async getAllUsers(req: IUserAuthRequest) {
     try {
+      throw new Error("this is an error");
       const users = await User.find();
       return this.handler.sendResponse(
         this.messages.getAll,

@@ -8,10 +8,12 @@ import { createTokenFor, hashField } from "../../auth/jwt";
 import { Response } from "express";
 import { ResponseHandlers } from "../responser/response-handlers";
 import { ResponseMessages } from "../../lib/constant/messages";
+import { validate } from "class-validator";
+import { UserChangePasswordValidation } from "../../utils/validators/auth/auth.validator";
 
 @Service()
 export class AuthService {
-  constructor(private handler: ResponseHandlers) {}
+  constructor(private handler: ResponseHandlers) { }
   private messages = ResponseMessages.auth;
 
   async registerUser(payload: TUser) {
