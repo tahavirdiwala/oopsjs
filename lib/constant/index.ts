@@ -12,6 +12,9 @@ enum StatusCodes {
   INTERNAL_SERVER_ERROR = 500,
 }
 
+enum PassWordConfig {
+  Range = 10,
+}
 const EnvironmentKeys = [
   "MongoUri",
   "Port",
@@ -31,9 +34,5 @@ const EnvironmentValues = [
   "JWT_EXPIRE",
   "JWT_SECRET",
 ];
-
-enum PassWordConfig {
-  Range = 10,
-}
 
 export { StatusCodes, PassWordConfig, EnvironmentKeys, EnvironmentValues };
