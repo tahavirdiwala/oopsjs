@@ -2,6 +2,14 @@ require("dotenv").config();
 import fs from "fs";
 import { join } from "path";
 
+/**
+ * @param {string} dir - current directory for files.
+ * @returns {string[]} all files inside current directory
+ */
+const getFiles = (dir: string): string[] => {
+  return fs.readdirSync(dir);
+};
+
 const getEnvConfig = (key: string) => {
   if (process.env[key]) return process.env[key];
   else throw new Error("env key does not exist");
@@ -18,21 +26,11 @@ function getPath(path: string): string {
 }
 
 function getPaths(paths: string[]): string[] {
-  return paths.map((p) => {
-    return getPath(p);
-  });
+  return paths.map((p) => getPath(p));
 }
 
 function getOsPaths(key: string): string[] {
   return getPaths(getOsEnvArray(key));
 }
-
-/**
- * @param {string} dir - current directory for files.
- * @returns {string[]} all files inside current directory
- */
-const getFiles = (dir: string): string[] => {
-  return fs.readdirSync(dir);
-};
 
 export { getEnvConfig, getFiles, getOsPaths };
