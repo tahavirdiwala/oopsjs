@@ -1,6 +1,6 @@
 import { Body, Get, JsonController, Post, Res } from "routing-controllers";
 import { AuthService } from "../../services/auth/auth.service";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { TUser } from "../../types/user";
 import { ResponseHandlers } from "../../services/responser/response-handlers";
 
