@@ -1,6 +1,6 @@
 import { StatusCodes } from "../../lib/constant";
-import { CustomError } from "../../exception";
 import { Response } from "express";
+import { CustomError } from "./custom-error.service";
 
 class ResponseHandlers {
   sendResponse<T>(
