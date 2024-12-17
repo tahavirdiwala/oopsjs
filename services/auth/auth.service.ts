@@ -91,13 +91,16 @@ export class AuthService {
           payload.currentPassword,
           user.password
         );
+
         if (validPassword) {
           const hashedPassword = await hashField(payload.newPassword);
+
           await User.updateOne(
             { email: payload.email },
             { password: hashedPassword }
           );
-          return this.handler.sendResponse("Password change successfully");
+
+          return this.handler.sendResponse(this.messages.changedPassword);
         } else {
           return this.handler.catchHandler("Current password does not match");
         }
