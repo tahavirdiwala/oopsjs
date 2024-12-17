@@ -10,14 +10,14 @@ import { ResponseHandlers } from "../responser/response-handlers";
 
 @Service()
 export class AuthService {
-  constructor(private responser: ResponseHandlers) {}
+  constructor(private handler: ResponseHandlers) {}
 
   async registerUser(payload: TUser) {
     try {
       const userExist = await User.findOne({ email: payload.email });
 
       if (userExist)
-        return this.responser.catchHandler("User already exist try login");
+        return this.handler.catchHandler("User already exist try login");
       else {
         const salt = await bcrypt.genSalt(PassWordConfig.Range);
 
@@ -27,14 +27,14 @@ export class AuthService {
         };
 
         const user = await User.create(registerPayload);
-        return this.responser.sendResponse(
+        return this.handler.sendResponse(
           "User created successfully",
           StatusCodes.CREATED,
           user
         );
       }
     } catch (error) {
-      return this.responser.catchHandler(error as Error);
+      return this.handler.catchHandler(error as Error);
     }
   }
 
@@ -56,30 +56,28 @@ export class AuthService {
             httpOnly: true,
           });
 
-          return this.responser.sendResponse(
+          return this.handler.sendResponse(
             "User login successfully",
             StatusCodes.OK,
             currentUser
           );
         } else {
-          return this.responser.catchHandler("Password is incorrect");
+          return this.handler.catchHandler("Password is incorrect");
         }
       } else {
-        return this.responser.catchHandler(
-          "User does not exist please register"
-        );
+        return this.handler.catchHandler("User does not exist please register");
       }
     } catch (error) {
-      return this.responser.catchHandler(error as Error);
+      return this.handler.catchHandler(error as Error);
     }
   }
 
   async logOut(res: Response) {
     try {
       res.clearCookie("jwt");
-      return this.responser.sendResponse("User logout successfully");
+      return this.handler.sendResponse("User logout successfully");
     } catch (error) {
-      return this.responser.catchHandler(error as Error);
+      return this.handler.catchHandler(error as Error);
     }
   }
 }

@@ -6,18 +6,18 @@ import { ResponseHandlers } from "../responser/response-handlers";
 
 @Service()
 export class UserService {
-  constructor(private responser: ResponseHandlers) {}
+  constructor(private handler: ResponseHandlers) {}
 
   async getAllUsers(req: IUserAuthRequest) {
     try {
       const data = await User.find();
-      return this.responser.sendResponse(
+      return this.handler.sendResponse(
         "Users fetched successfully",
         StatusCodes.OK,
         data
       );
     } catch (error) {
-      return this.responser.catchHandler(error as Error);
+      return this.handler.catchHandler(error as Error);
     }
   }
 }

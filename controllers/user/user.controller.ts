@@ -9,13 +9,13 @@ import { ApiResponser } from "../../services/responser/response-handlers";
 export class UserController {
   constructor(
     private userService: UserService,
-    private response: ApiResponser
+    private handler: ApiResponser
   ) {}
 
   @Get("/")
   @UseBefore(authMiddleware())
   async getAll(@Req() req: IUserAuthRequest, @Res() res: Response) {
     const data = await this.userService.getAllUsers(req);
-    return this.response.responser(res, data);
+    return this.handler.responser(res, data);
   }
 }
