@@ -7,10 +7,12 @@ import { env } from "../../lib/env";
 import { createTokenFor } from "../../auth/jwt";
 import { Response } from "express";
 import { ResponseHandlers } from "../responser/response-handlers";
+import { ResponseMessages } from "../../lib/constant/messages";
 
 @Service()
 export class AuthService {
   constructor(private handler: ResponseHandlers) {}
+  private messages = ResponseMessages.auth;
 
   async registerUser(payload: TUser) {
     try {
@@ -28,7 +30,7 @@ export class AuthService {
 
         const user = await User.create(registerPayload);
         return this.handler.sendResponse(
-          "User created successfully",
+          this.messages.register,
           StatusCodes.CREATED,
           user
         );
@@ -57,7 +59,7 @@ export class AuthService {
           });
 
           return this.handler.sendResponse(
-            "User login successfully",
+            this.messages.login,
             StatusCodes.OK,
             currentUser
           );
@@ -75,7 +77,7 @@ export class AuthService {
   async logOut(res: Response) {
     try {
       res.clearCookie("jwt");
-      return this.handler.sendResponse("User logout successfully");
+      return this.handler.sendResponse(this.messages.logout);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
