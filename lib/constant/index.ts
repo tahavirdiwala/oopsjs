@@ -16,19 +16,24 @@ const EnvironmentKeys = [
   "MongoUri",
   "Port",
   "RoutePrefix",
-  // "Controllers",
-  // "Middlewares",
+  "Controllers",
+  "Middlewares",
+  "JwtExpiry",
+  "JwtSecret",
 ] as const;
+
 const EnvironmentValues = [
   "MONGO_URL",
   "PORT",
   "PREFIX",
-  // "Controllers",
-  // "Middlewares",
+  "Controllers",
+  "Middlewares",
+  "JWT_EXPIRE",
+  "JWT_SECRET",
 ];
 
 enum PassWordConfig {
-  Range = 10
+  Range = 10,
 }
 
 export { StatusCodes, PassWordConfig, EnvironmentKeys, EnvironmentValues };

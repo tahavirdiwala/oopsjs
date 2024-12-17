@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
+import { TUser } from "../types/user";
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<TUser>(
   {
     firstName: {
       type: String,
@@ -16,19 +17,19 @@ const UserSchema = new Schema(
     },
     phoneNo: {
       type: String,
-      requried: true,
+      required: true,
     },
     password: {
       type: String,
-      requried: true,
+      required: true,
       index: true,
-    }
+    },
   },
   {
     timestamps: true,
   }
 );
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model<TUser>("User", UserSchema);
 
 export default User;

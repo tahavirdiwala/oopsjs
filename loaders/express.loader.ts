@@ -7,8 +7,6 @@ import {
   MicroframeworkSettings,
 } from "microframework-w3tec";
 import { getOsPaths } from "../utils";
-import { AuthController } from "../controllers/auth/auth.controller";
-import { UserController } from "../controllers/user/user.controller";
 
 const expressLoader: MicroframeworkLoader = (
   settings: MicroframeworkSettings | undefined
