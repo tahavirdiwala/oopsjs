@@ -4,16 +4,15 @@ import User from "../../models/user.model";
 import bcrypt, { compare } from "bcryptjs";
 import { PassWordConfig, StatusCodes } from "../../lib/constant";
 import { env } from "../../lib/env";
-import { createTokenFor, hashField } from "../../auth/jwt";
+import { createTokenFor, hashField, verifyToken } from "../../auth/jwt";
 import { Response } from "express";
 import { ResponseHandlers } from "../responser/response-handlers";
 import { ResponseMessages } from "../../lib/constant/messages";
-import { validate } from "class-validator";
-import { UserChangePasswordValidation } from "../../utils/validators/auth/auth.validator";
+import nodemailer from "nodemailer";
 
 @Service()
 export class AuthService {
-  constructor(private handler: ResponseHandlers) { }
+  constructor(private handler: ResponseHandlers) {}
   private messages = ResponseMessages.auth;
 
   async registerUser(payload: TUser) {
@@ -108,6 +107,52 @@ export class AuthService {
         }
       } else {
         return this.handler.catchHandler("User not found please register");
+      }
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
+  async forgotPassword(payload: TUser) {
+    try {
+      const getUser = await User.findBy({ email: payload.email });
+
+      const token = createTokenFor(getUser?.user || {}, env.JwtPasswordExpiry);
+
+      const url = `${env.ClientUrl}/auth/reset-password/${token}`;
+
+      const transporter = nodemailer.createTransport(
+        this.messages.transporter as any
+      );
+
+      const options = {
+        ...this.messages.receiver,
+        text: this.messages.receiver.text(url),
+        to: getUser?.user.email,
+      };
+
+      await transporter.sendMail(options);
+
+      return this.handler.sendResponse(this.messages.forgotPassword);
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
+  async resetPassword(token: string, payload: TUser) {
+    try {
+      if (payload.password) {
+        const decode = verifyToken(token);
+        const user = await User.findOne({ email: decode.email });
+
+        const newPassword = await hashField(payload.password);
+
+        user!.password = newPassword;
+        await user?.save();
+
+        return this.handler.sendResponse(this.messages.resetPassword);
+      } else {
+        return this.handler.catchHandler("Please provide password");
       }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
