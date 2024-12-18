@@ -1,4 +1,11 @@
-import { Body, Get, JsonController, Post, Res } from "routing-controllers";
+import {
+  Body,
+  Get,
+  JsonController,
+  Param,
+  Post,
+  Res,
+} from "routing-controllers";
 import { AuthService } from "../../services/auth/auth.service";
 import { Response } from "express";
 import { TUser } from "../../types/user";
@@ -33,6 +40,22 @@ export class AuthController {
     @Res() res: Response
   ) {
     const data = await this.auth.changePassword(payload);
+    return this.handler.responser(res, data);
+  }
+
+  @Post("/forgot-password")
+  async forgotPassword(@Body() payload: TUser, @Res() res: Response) {
+    const data = await this.auth.forgotPassword(payload);
+    return this.handler.responser(res, data);
+  }
+
+  @Post("/reset-password/:token")
+  async resetPassword(
+    @Param("token") token: string,
+    @Body() payload: TUser,
+    @Res() res: Response
+  ) {
+    const data = await this.auth.resetPassword(token, payload);
     return this.handler.responser(res, data);
   }
 }
