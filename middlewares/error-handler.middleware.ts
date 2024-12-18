@@ -19,19 +19,14 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
       error.errors[0] instanceof ValidationError
     ) {
       const exception = this.formatValidationError(error.errors);
-      this.commonException(
-        res,
-        "Invalid input",
-        exception,
-        StatusCodes.BAD_REQUEST
-      );
+      this.exception(res, "Invalid input", exception, StatusCodes.BAD_REQUEST);
     } else {
-      this.commonException(res, error?.message, error, error.httpCode, "Err");
+      this.exception(res, error?.message, error, error.httpCode, "Err");
       console.log(error.name, error.message, error.stack);
     }
   }
 
-  private commonException<T>(
+  private exception<T>(
     res: express.Response,
     message: string,
     error: T,
