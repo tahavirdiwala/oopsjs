@@ -10,7 +10,7 @@ import { StatusCodes } from "../lib/constant";
 @Middleware({ type: "after" })
 export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
   public error(
-    error: HttpError & { errors: any },
+    error: HttpError & { errors: ValidationError },
     req: express.Request,
     res: express.Response
   ): void {
@@ -51,8 +51,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
     errors: ValidationError[]
   ): Record<string, any>[] {
     return errors.map((item) => ({
-      property: item.property,
-      constraints: item.constraints,
+      [item.property]: item.constraints,
     }));
   }
 }
