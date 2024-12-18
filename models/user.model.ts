@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { TUser } from "../types/user";
+import { TUser, IUserModel } from "../types/user";
 
 const UserSchema = new Schema<TUser>(
   {
@@ -27,9 +27,21 @@ const UserSchema = new Schema<TUser>(
   },
   {
     timestamps: true,
+    statics: {
+      async findBy(field = {}) {
+        try {
+          const getUser = await this.findOne(field);
+
+          const { password, ...user } = getUser?.toJSON() as TUser;
+
+          return { password, user };
+        } catch (error) {
+          throw error;
+        }
+      },
+    },
   }
 );
 
-const User = mongoose.model<TUser>("User", UserSchema);
-
+const User = mongoose.model<TUser, IUserModel>("User", UserSchema);
 export default User;

@@ -24,6 +24,10 @@ const environmentKeys = [
   "Middlewares",
   "JwtExpiry",
   "JwtSecret",
+  "JwtPasswordExpiry",
+  "Email",
+  "Password",
+  "ClientUrl",
 ] as const;
 
 const environmentValues = [
@@ -34,6 +38,10 @@ const environmentValues = [
   "Middlewares",
   "JWT_EXPIRE",
   "JWT_SECRET",
+  "JWT_PASSWORD_RESET_EXPIRE",
+  "EMAIL",
+  "PASSWORD",
+  "CLIENT_URL",
 ];
 
 export { StatusCodes, PassWordConfig, environmentKeys, environmentValues };
