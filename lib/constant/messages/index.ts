@@ -1,4 +1,5 @@
 import { env } from "../../env";
+import SMTPPool from "nodemailer/lib/smtp-pool";
 
 const ResponseMessages = {
   auth: {
@@ -23,6 +24,7 @@ const ResponseMessages = {
       service: "gmail",
       port: 465,
       secure: true,
+      pool: true,
       logger: true,
       debug: true,
       secureConnection: false,
@@ -33,7 +35,7 @@ const ResponseMessages = {
       tls: {
         rejectUnAuthorized: true,
       },
-    },
+    } as SMTPPool | SMTPPool.Options,
   },
   user: {
     getAll: `Users fetched successfully`,

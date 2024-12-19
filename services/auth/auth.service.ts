@@ -113,7 +113,7 @@ export class AuthService {
     }
   }
 
-  async forgotPassword(payload: TUser) {
+  async forgotPassword(payload: Pick<TUser, "email">) {
     try {
       const getUser = await User.findBy({ email: payload.email });
 
@@ -121,9 +121,7 @@ export class AuthService {
 
       const url = `${env.ClientUrl}/auth/reset-password/${token}`;
 
-      const transporter = nodemailer.createTransport(
-        this.messages.transporter as any
-      );
+      const transporter = nodemailer.createTransport(this.messages.transporter);
 
       const options = {
         ...this.messages.receiver,
@@ -148,6 +146,7 @@ export class AuthService {
         const newPassword = await hashField(payload.password);
 
         user!.password = newPassword;
+
         await user?.save();
 
         return this.handler.sendResponse(this.messages.resetPassword);
