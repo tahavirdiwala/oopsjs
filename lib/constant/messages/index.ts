@@ -8,9 +8,13 @@ const ResponseMessages = {
     logout: `User logout successfully`,
     changedPassword: `Password change successfully`,
     resetPassword: `Password reset successfully`,
+    userExist: `User already exist try login`,
     forgotPassword:
       "Password reset link was sent to your mail please open your mail",
     notFound: `User not found`,
+    providePassword: `Please provide password`,
+    inCorrectPassword: `Password is incorrect`,
+    passWordNotMatch: `Current password does not match`,
     receiver: {
       from: "somerandom@gmail.com",
       subject: "Password Reset Request",

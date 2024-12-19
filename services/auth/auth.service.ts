@@ -19,17 +19,16 @@ export class AuthService {
     try {
       const userExist = await User.findOne({ email: payload.email });
 
-      if (userExist)
-        return this.handler.catchHandler("User already exist try login");
+      if (userExist) return this.handler.catchHandler(this.messages.userExist);
       else {
         const salt = await bcrypt.genSalt(PassWordConfig.Range);
 
-        const registerPayload = {
+        const registerUserPayload = {
           ...payload,
           password: await bcrypt.hash(payload.password, salt),
         };
 
-        const user = await User.create(registerPayload);
+        const user = await User.create(registerUserPayload);
         return this.handler.sendResponse(
           this.messages.register,
           StatusCodes.CREATED,
@@ -65,10 +64,10 @@ export class AuthService {
             currentUser
           );
         } else {
-          return this.handler.catchHandler("Password is incorrect");
+          return this.handler.catchHandler(this.messages.inCorrectPassword);
         }
       } else {
-        return this.handler.catchHandler("User does not exist please register");
+        return this.handler.catchHandler(this.messages.notFound);
       }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -103,10 +102,10 @@ export class AuthService {
 
           return this.handler.sendResponse(this.messages.changedPassword);
         } else {
-          return this.handler.catchHandler("Current password does not match");
+          return this.handler.catchHandler(this.messages.passWordNotMatch);
         }
       } else {
-        return this.handler.catchHandler("User not found please register");
+        return this.handler.catchHandler(this.messages.notFound);
       }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -161,7 +160,7 @@ export class AuthService {
           return this.handler.catchHandler(this.messages.notFound);
         }
       } else {
-        return this.handler.catchHandler("Please provide password");
+        return this.handler.catchHandler(this.messages.providePassword);
       }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
