@@ -136,7 +136,7 @@ export class AuthService {
 
         return this.handler.sendResponse(this.messages.forgotPassword);
       } else {
-        return this.handler.catchHandler("User not found");
+        return this.handler.catchHandler(this.messages.notFound);
       }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -149,13 +149,17 @@ export class AuthService {
         const decode = verifyToken(token);
         const user = await User.findOne({ email: decode.email });
 
-        const newPassword = await hashField(payload.password);
+        if (user) {
+          const newPassword = await hashField(payload.password);
 
-        user!.password = newPassword;
+          user.password = newPassword;
 
-        await user?.save();
+          await user.save();
 
-        return this.handler.sendResponse(this.messages.resetPassword);
+          return this.handler.sendResponse(this.messages.resetPassword);
+        } else {
+          return this.handler.catchHandler(this.messages.notFound);
+        }
       } else {
         return this.handler.catchHandler("Please provide password");
       }

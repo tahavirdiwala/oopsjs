@@ -10,6 +10,7 @@ const ResponseMessages = {
     resetPassword: `Password reset successfully`,
     forgotPassword:
       "Password reset link was sent to your mail please open your mail",
+    notFound: `User not found`,
     receiver: {
       from: "somerandom@gmail.com",
       subject: "Password Reset Request",
