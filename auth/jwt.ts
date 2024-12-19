@@ -21,8 +21,8 @@ const hashField = async (password: string) => {
 function verifyToken(token: string): any {
   try {
     return jwt.verify(token, env.JwtSecret);
-  } catch (e) {
-    return null;
+  } catch (error) {
+    throw error;
   }
 }
 

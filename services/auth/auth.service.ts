@@ -117,21 +117,27 @@ export class AuthService {
     try {
       const getUser = await User.findBy({ email: payload.email });
 
-      const token = createTokenFor(getUser?.user || {}, env.JwtPasswordExpiry);
+      if (getUser) {
+        const token = createTokenFor(getUser.user, env.JwtPasswordExpiry);
 
-      const url = `${env.ClientUrl}/auth/reset-password/${token}`;
+        const url = `${env.ClientUrl}/auth/reset-password/${token}`;
 
-      const transporter = nodemailer.createTransport(this.messages.transporter);
+        const transporter = nodemailer.createTransport(
+          this.messages.transporter
+        );
 
-      const options = {
-        ...this.messages.receiver,
-        text: this.messages.receiver.text(url),
-        to: getUser?.user.email,
-      };
+        const options = {
+          ...this.messages.receiver,
+          text: this.messages.receiver.text(url),
+          to: getUser.user.email,
+        };
 
-      await transporter.sendMail(options);
+        await transporter.sendMail(options);
 
-      return this.handler.sendResponse(this.messages.forgotPassword);
+        return this.handler.sendResponse(this.messages.forgotPassword);
+      } else {
+        return this.handler.catchHandler("User not found");
+      }
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
