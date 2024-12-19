@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { TUser, TUserModel } from "../types/user";
-import { statics as userStaticMethods } from "../utils/statics/user.static";
+import { statics as userStaticMethods } from "../utils/statics/user/user.static";
 
 const UserSchema = new Schema<TUser>(
   {

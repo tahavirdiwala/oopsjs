@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { TUser } from "../../types/user";
+import { TUser } from "../../../types/user";
 
 const statics = {
   async findBy(this: mongoose.Model<TUser>, field = {}) {
