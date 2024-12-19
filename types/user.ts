@@ -14,11 +14,11 @@ type TUserChangePassword = {
   newPassword: string;
 };
 
-interface IUserModel extends Model<TUser> {
+type TUserModel = Model<TUser> & {
   findBy(field: Partial<TUser>): Promise<{
     user: Exclude<TUser, "password">;
     password: string;
-  } | null>;
-}
+  }>;
+};
 
-export { TUser, TUserChangePassword, IUserModel };
+export { TUser, TUserChangePassword, TUserModel };
