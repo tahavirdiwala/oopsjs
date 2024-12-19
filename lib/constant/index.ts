@@ -44,4 +44,8 @@ const envValues = [
   "CLIENT_URL",
 ];
 
-export { StatusCodes, PassWordConfig, envKeys, envValues };
+enum JwtConfig {
+  MaxAge = 12 * 60 * 60 * 1000,
+}
+
+export { StatusCodes, PassWordConfig, JwtConfig, envKeys, envValues };

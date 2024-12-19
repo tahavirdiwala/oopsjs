@@ -2,7 +2,7 @@ import { Service } from "typedi";
 import { TUser, TUserChangePassword } from "../../types/user";
 import User from "../../models/user.model";
 import bcrypt, { compare } from "bcryptjs";
-import { PassWordConfig, StatusCodes } from "../../lib/constant";
+import { JwtConfig, PassWordConfig, StatusCodes } from "../../lib/constant";
 import { env } from "../../lib/env";
 import { createTokenFor, hashField, verifyToken } from "../../auth/jwt";
 import { Response } from "express";
@@ -55,7 +55,7 @@ export class AuthService {
           const token = createTokenFor(currentUser, withExpiry);
 
           res.cookie("jwt", token, {
-            maxAge: 12 * 60 * 60 * 1000, // 1 day
+            maxAge: JwtConfig.MaxAge, // 1 day
             httpOnly: true,
           });
 
