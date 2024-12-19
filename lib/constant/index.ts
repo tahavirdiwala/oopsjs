@@ -16,7 +16,7 @@ enum PassWordConfig {
   Range = 10,
 }
 
-const environmentKeys = [
+const envKeys = [
   "MongoUri",
   "Port",
   "RoutePrefix",
@@ -30,7 +30,7 @@ const environmentKeys = [
   "ClientUrl",
 ] as const;
 
-const environmentValues = [
+const envValues = [
   "MONGO_URL",
   "PORT",
   "PREFIX",
@@ -44,4 +44,4 @@ const environmentValues = [
   "CLIENT_URL",
 ];
 
-export { StatusCodes, PassWordConfig, environmentKeys, environmentValues };
+export { StatusCodes, PassWordConfig, envKeys, envValues };

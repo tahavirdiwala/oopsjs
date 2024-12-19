@@ -1,10 +1,10 @@
 import utilityDecorators from "../../utils";
-import { environmentValues, environmentKeys } from "../constant";
+import { envValues, envKeys } from "../constant";
 
-type Keys = (typeof environmentKeys)[number];
+type Keys = (typeof envKeys)[number];
 
-const env = environmentValues.reduce((acc, curr, index) => {
-  acc[environmentKeys[index]] = utilityDecorators.getEnvConfig(curr);
+const env = envValues.reduce((acc, curr, index) => {
+  acc[envKeys[index]] = utilityDecorators.getEnvConfig(curr);
   return acc;
 }, {} as Record<Keys, string>);
 
