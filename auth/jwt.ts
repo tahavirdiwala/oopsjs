@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
-import { env } from "../lib/env";
 import bcrypt from "bcryptjs";
 import { PassWordConfig } from "../lib/constant";
+import { env } from "../lib/env";
 
 /**
  * Sets a jwt response for given user.
