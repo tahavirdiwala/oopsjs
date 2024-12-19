@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { TUser, TUserModel } from "../types/user";
-import { statics } from "../utils/statics/user.static";
+import { statics as userStaticMethods } from "../utils/statics/user.static";
 
 const UserSchema = new Schema<TUser>(
   {
@@ -29,7 +29,7 @@ const UserSchema = new Schema<TUser>(
   {
     timestamps: true,
     statics: {
-      ...statics,
+      ...userStaticMethods,
     },
   }
 );
