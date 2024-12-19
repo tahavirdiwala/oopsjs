@@ -16,6 +16,10 @@ enum PassWordConfig {
   Range = 10,
 }
 
+enum JwtConfig {
+  MaxAge = 12 * 60 * 60 * 1000,
+}
+
 const envKeys = [
   "MongoUri",
   "Port",
@@ -43,9 +47,5 @@ const envValues = [
   "PASSWORD",
   "CLIENT_URL",
 ];
-
-enum JwtConfig {
-  MaxAge = 12 * 60 * 60 * 1000,
-}
 
 export { StatusCodes, PassWordConfig, JwtConfig, envKeys, envValues };
