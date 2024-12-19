@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { TUser, TUserModel } from "../types/user";
+import { statics } from "../utils/statics/user.static";
 
 const UserSchema = new Schema<TUser>(
   {
@@ -28,17 +29,7 @@ const UserSchema = new Schema<TUser>(
   {
     timestamps: true,
     statics: {
-      async findBy(field = {}) {
-        try {
-          const getUser = await this.findOne(field);
-
-          const { password, ...user } = getUser?.toJSON() as TUser;
-
-          return { password, user };
-        } catch (error) {
-          throw error;
-        }
-      },
+      ...statics,
     },
   }
 );
