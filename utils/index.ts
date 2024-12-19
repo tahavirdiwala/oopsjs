@@ -11,7 +11,11 @@ class UtilityDecorators {
     return fs.readdirSync(dir);
   }
 
-  getEnvConfig(key: string) {
+  /**
+   * @param {string} key - for accessing env with provided key.
+   * @returns {string} returns value of associated key
+   */
+  getEnvConfig(key: string): string {
     if (process.env[key]) return process.env[key];
     else throw new Error("env key does not exist");
   }
