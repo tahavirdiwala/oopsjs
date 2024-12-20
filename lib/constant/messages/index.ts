@@ -49,6 +49,9 @@ const ResponseMessages = {
   order: {
     add: `Order created successfully`,
     getAll: `Orders fetched successfully`,
+    get: `Order fetched successfully`,
+    edit: `Order update successfully`,
+    delete: `Order delete successfully`,
     addBulk: `Bulk orders created successfully`,
     updateBulk: `Bulk orders updated successfully`,
     deleteBulk: `Bulk orders deleted successfully`,

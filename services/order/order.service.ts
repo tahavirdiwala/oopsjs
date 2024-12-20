@@ -36,6 +36,40 @@ export class OrderService {
     }
   }
 
+  async getOrder(_id: string) {
+    try {
+      const order = await Order.findOne({ _id });
+
+      return this.handler.sendResponse(
+        this.messages.get,
+        StatusCodes.OK,
+        order
+      );
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
+  async editOrder(_id: string, payload: TOrder) {
+    try {
+      await Order.findOneAndUpdate({ _id }, payload);
+
+      return this.handler.sendResponse(this.messages.edit);
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
+  async deleteOrder(_id: string) {
+    try {
+      await Order.findOneAndDelete({ _id });
+
+      return this.handler.sendResponse(this.messages.delete);
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
   async createBulkOrders(payload: TOrder[]) {
     try {
       const orders = await Order.insertMany(payload);
