@@ -1,8 +1,11 @@
-import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 type TOrder = {
-  name: string;
-  description: Schema.Types.Mixed;
+  _id: mongoose.Types.ObjectId;
+  productName: string;
+  quantity: number;
+  price: number;
+  status: string;
 };
 
 export { TOrder };
