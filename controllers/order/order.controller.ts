@@ -3,6 +3,7 @@ import {
   Delete,
   Get,
   JsonController,
+  Param,
   Post,
   Put,
   Res,
@@ -28,6 +29,16 @@ export class UserController {
   @Get("/")
   async getAll(@Res() res: Response) {
     const data = await this.orderService.getAllOrders();
+    return this.handler.responser(res, data);
+  }
+
+  @Put("/:id")
+  async edit(
+    @Param("id") id: string,
+    @Body() payload: TOrder,
+    @Res() res: Response
+  ) {
+    const data = await this.orderService.editOrder(id, payload);
     return this.handler.responser(res, data);
   }
 
