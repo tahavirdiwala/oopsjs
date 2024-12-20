@@ -10,7 +10,7 @@ import { AuthService } from "../../services/auth/auth.service";
 import { Response } from "express";
 import { TUser } from "../../types/user";
 import { ApiResponser } from "../../services/responser/response-handlers";
-import { UserChangePasswordValidation } from "../../dto/auth/auth.validator";
+import { UserChangePasswordValidation } from "../../dto/auth.validator";
 
 @JsonController("/auth")
 export class AuthController {

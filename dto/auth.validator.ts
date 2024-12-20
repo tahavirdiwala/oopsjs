@@ -1,5 +1,5 @@
 import { IsEmail, MinLength } from "class-validator";
-import { TUserChangePassword } from "../../types/user";
+import { TUserChangePassword } from "../types/user";
 
 class UserChangePasswordValidation implements TUserChangePassword {
   @IsEmail()
