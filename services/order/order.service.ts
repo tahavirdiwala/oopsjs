@@ -3,16 +3,18 @@ import { StatusCodes } from "../../lib/constant";
 import { ResponseHandlers } from "../responser/response-handlers";
 import Order from "../../models/order.model";
 import { TOrder } from "../../types/order";
+import { ResponseMessages } from "../../lib/constant/messages";
 
 @Service()
 export class OrderService {
   constructor(private handler: ResponseHandlers) {}
+  private messages = ResponseMessages.order;
 
   async addOrder(payload: TOrder) {
     try {
       const order = await Order.create(payload);
       return this.handler.sendResponse(
-        "Order created successfully",
+        this.messages.add,
         StatusCodes.CREATED,
         order
       );
@@ -25,7 +27,7 @@ export class OrderService {
     try {
       const orders = await Order.find();
       return this.handler.sendResponse(
-        "Orders fetched successfully",
+        this.messages.getAll,
         StatusCodes.OK,
         orders
       );
@@ -38,7 +40,7 @@ export class OrderService {
     try {
       const orders = await Order.insertMany(payload);
       return this.handler.sendResponse(
-        "Bulk orders created successfully",
+        this.messages.addBulk,
         StatusCodes.CREATED,
         orders
       );
@@ -60,7 +62,7 @@ export class OrderService {
       await Order.bulkWrite(operations);
 
       return this.handler.sendResponse(
-        "Bulk orders updated successfully",
+        this.messages.updateBulk,
         StatusCodes.OK
       );
     } catch (error) {
@@ -73,7 +75,7 @@ export class OrderService {
       await Order.deleteMany({ _id: { $in: ids } });
 
       return this.handler.sendResponse(
-        "Bulk orders deleted successfully",
+        this.messages.deleteBulk,
         StatusCodes.OK
       );
     } catch (error) {

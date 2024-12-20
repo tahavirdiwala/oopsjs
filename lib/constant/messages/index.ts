@@ -46,6 +46,13 @@ const ResponseMessages = {
     getAll: `Users fetched successfully`,
     get: `User fetched successfully`,
   },
+  order: {
+    add: `Order created successfully`,
+    getAll: `Orders fetched successfully`,
+    addBulk: `Bulk orders created successfully`,
+    updateBulk: `Bulk orders updated successfully`,
+    deleteBulk: `Bulk orders deleted successfully`,
+  },
 } as const;
 
 export { ResponseMessages };
