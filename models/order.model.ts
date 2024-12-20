@@ -22,6 +22,11 @@ const OrderSchema = new Schema<TOrder>(
       enum: ["paid", "checkout", "canceled", "failed"],
       index: true,
     },
+    ordersId: {
+      type: Number,
+      index: true,
+      unique: true,
+    },
   },
   {
     timestamps: true,

@@ -6,6 +6,7 @@ type TOrder = Document & {
   quantity: number;
   price: number;
   status: string;
+  ordersId: number;
 };
 
 export { TOrder };
