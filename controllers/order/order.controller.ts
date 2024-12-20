@@ -1,6 +1,7 @@
 import {
   Body,
   Delete,
+  Get,
   JsonController,
   Post,
   Put,
@@ -21,6 +22,12 @@ export class UserController {
   @Post("/")
   async add(@Body() payload: TOrder, @Res() res: Response) {
     const data = await this.orderService.addOrder(payload);
+    return this.handler.responser(res, data);
+  }
+
+  @Get("/")
+  async getAll(@Res() res: Response) {
+    const data = await this.orderService.getAllOrders();
     return this.handler.responser(res, data);
   }
 

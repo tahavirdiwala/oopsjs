@@ -21,6 +21,19 @@ export class OrderService {
     }
   }
 
+  async getAllOrders() {
+    try {
+      const orders = await Order.find();
+      return this.handler.sendResponse(
+        "Orders fetched successfully",
+        StatusCodes.OK,
+        orders
+      );
+    } catch (error) {
+      return this.handler.catchHandler(error as Error);
+    }
+  }
+
   async createBulkOrders(payload: TOrder[]) {
     try {
       const orders = await Order.insertMany(payload);
