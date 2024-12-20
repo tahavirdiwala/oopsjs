@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-type TOrder = {
+type TOrder = Document & {
   _id: mongoose.Types.ObjectId;
   productName: string;
   quantity: number;

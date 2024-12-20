@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
+import { TOrder } from "../types/order";
 
-const OrderSchema = new Schema(
+const OrderSchema = new Schema<TOrder>(
   {
     productName: {
       type: String,
@@ -27,5 +28,5 @@ const OrderSchema = new Schema(
   }
 );
 
-const Order = mongoose.model("Order", OrderSchema);
+const Order = mongoose.model<TOrder>("Order", OrderSchema);
 export default Order;
