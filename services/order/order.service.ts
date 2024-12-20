@@ -49,15 +49,15 @@ export class OrderService {
 
   async updateBulkOrders(payload: TOrder[]) {
     try {
-      const updateBulkOrders = payload.map(({ _id, ...item }) => ({
+      const operations = payload.map(({ _id, ...item }) => ({
         updateOne: {
-          filter: { _id: _id },
+          filter: { _id },
           update: { $set: item },
           upsert: false,
         },
       }));
 
-      await Order.bulkWrite(updateBulkOrders);
+      await Order.bulkWrite(operations);
 
       return this.handler.sendResponse(
         "Bulk orders updated successfully",
