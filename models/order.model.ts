@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { TOrder } from "../types/order";
+import { TOrder } from "../types/order/order";
 
 const OrderSchema = new Schema<TOrder>(
   {

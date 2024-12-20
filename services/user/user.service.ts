@@ -1,7 +1,7 @@
 import { Service } from "typedi";
 import User from "../../models/user.model";
 import { StatusCodes } from "../../lib/constant";
-import { IUserAuthRequest } from "../../types/express.type";
+import { IUserAuthRequest } from "../../types/express/express.type";
 import { ResponseHandlers } from "../responser/response-handlers";
 import { ResponseMessages } from "../../lib/constant/messages";
 

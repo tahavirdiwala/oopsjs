@@ -10,7 +10,7 @@ import {
 import { Response } from "express";
 import { ApiResponser } from "../../services/responser/response-handlers";
 import { OrderService } from "../../services/order/order.service";
-import { TOrder } from "../../types/order";
+import { TOrder } from "../../types/order/order";
 
 @JsonController("/orders")
 export class UserController {

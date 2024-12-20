@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { TUser, TUserChangePassword } from "../../types/user";
+import { TUser, TUserChangePassword } from "../../types/user/user";
 import User from "../../models/user.model";
 import bcrypt, { compare } from "bcryptjs";
 import { JwtConfig, PassWordConfig, StatusCodes } from "../../lib/constant";

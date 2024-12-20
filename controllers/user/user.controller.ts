@@ -9,7 +9,7 @@ import {
 import { UserService } from "../../services/user/user.service";
 import { Response } from "express";
 import { authMiddleware } from "../../auth/auth";
-import { IUserAuthRequest } from "../../types/express.type";
+import { IUserAuthRequest } from "../../types/express/express.type";
 import { ApiResponser } from "../../services/responser/response-handlers";
 
 @JsonController("/users")

@@ -2,7 +2,7 @@ import { Service } from "typedi";
 import { StatusCodes } from "../../lib/constant";
 import { ResponseHandlers } from "../responser/response-handlers";
 import Order from "../../models/order.model";
-import { TOrder } from "../../types/order";
+import { TOrder } from "../../types/order/order";
 import { ResponseMessages } from "../../lib/constant/messages";
 
 @Service()
