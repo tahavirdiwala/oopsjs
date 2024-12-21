@@ -43,9 +43,7 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
     });
   }
 
-  private formatValidationError(
-    errors: ValidationError[]
-  ): Record<string, any>[] {
+  private formatValidationError(errors: ValidationError[]) {
     return errors.map((item) => ({
       [item.property]: item.constraints,
     }));
