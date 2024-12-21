@@ -3,6 +3,11 @@ import { TOrder } from "../types/order/order";
 
 const OrderSchema = new Schema<TOrder>(
   {
+    id: {
+      type: Number,
+      index: true,
+      unique: true,
+    },
     productName: {
       type: String,
       required: true,
@@ -21,11 +26,6 @@ const OrderSchema = new Schema<TOrder>(
       type: String,
       enum: ["paid", "checkout", "canceled", "failed"],
       index: true,
-    },
-    ordersId: {
-      type: Number,
-      index: true,
-      unique: true,
     },
   },
   {

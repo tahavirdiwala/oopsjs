@@ -4,6 +4,11 @@ import { statics as userStaticMethods } from "../utils/statics/user/user.static"
 
 const UserSchema = new Schema<TUser>(
   {
+    id: {
+      type: Number,
+      index: true,
+      unique: true,
+    },
     firstName: {
       type: String,
       required: true,
