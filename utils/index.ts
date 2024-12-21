@@ -20,20 +20,37 @@ class UtilityDecorators {
     else throw new Error("env key does not exist");
   }
 
-  getOsEnvArray(key: string, delimiter = ","): string[] {
+  /**
+   * @param {string} key - for accessing env with provided key.
+   * @param {string} delimiter separator for given key
+   * @returns {string[]} returns array of string
+   */
+  getOsEnvArray(key: string, delimiter: string = ","): string[] {
     return (process.env[key] && process.env[key].split(delimiter)) || [];
   }
 
+  /**
+   * @param {string} path - current path of file
+   * @returns {string} returns path for current environment
+   */
   getPath(path: string): string {
     return process.env.NODE_ENV === "production"
       ? join(process.cwd(), "/dist/" + path.slice(0, -3) + ".js")
       : join(process.cwd(), path);
   }
 
+  /**
+   * @param {string[]} paths - current path of file
+   * @returns {string[]} returns paths for current environment
+   */
   getPaths(paths: string[]): string[] {
     return paths.map(this.getPath);
   }
 
+  /**
+   * @param {string} key - get all paths of inside folder by specified key
+   * @returns {string[]} returns paths for current folder
+   */
   getOsPaths(key: string): string[] {
     return this.getPaths(this.getOsEnvArray(key));
   }

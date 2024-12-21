@@ -1,5 +1,5 @@
-import { env } from "../../env";
 import SMTPPool from "nodemailer/lib/smtp-pool";
+import { env } from "../../env";
 
 const ResponseMessages = {
   auth: {
