@@ -18,7 +18,7 @@ const hashField = async (password: string) => {
   return await bcrypt.hash(password, PassWordConfig.Range);
 };
 
-function verifyToken(token: string): any {
+function verifyToken(token: string): jwt.JwtPayload | string {
   try {
     return jwt.verify(token, env.JwtSecret);
   } catch (error) {

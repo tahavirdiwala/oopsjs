@@ -145,7 +145,7 @@ export class AuthService {
   async resetPassword(token: string, payload: TUser) {
     try {
       if (payload.password) {
-        const decode = verifyToken(token);
+        const decode = verifyToken(token) as TUser;
         const user = await User.findOne({ email: decode.email });
 
         if (user) {
