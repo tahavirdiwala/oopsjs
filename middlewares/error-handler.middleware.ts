@@ -6,6 +6,7 @@ import {
   Middleware,
 } from "routing-controllers";
 import { StatusCodes } from "../lib/constant";
+import logger from "../decorators/logger";
 
 @Middleware({ type: "after" })
 export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
@@ -21,8 +22,8 @@ export class ErrorHandlerMiddleware implements ExpressErrorMiddlewareInterface {
       const exception = this.formatValidationError(error.errors);
       this.exception(res, "Invalid input", exception, StatusCodes.BAD_REQUEST);
     } else {
+      logger.error({ ...error, message: error?.message });
       this.exception(res, error?.message, error, error.httpCode, "Err");
-      console.log(error.name, error.message, error.stack);
     }
   }
 
