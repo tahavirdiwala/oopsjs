@@ -20,7 +20,7 @@ export class UserController {
   ) {}
 
   @Get("/")
-  @UseBefore(authMiddleware())
+  @UseBefore(authMiddleware)
   async getAll(@Req() req: IUserAuthRequest, @Res() res: Response) {
     const data = await this.userService.getAllUsers(req);
     return this.handler.responser(res, data);
