@@ -13,8 +13,11 @@ const counter = await counterCollection.findOneAndUpdate(
 { returnNewDocument: true, upsert : true}
 );
 
+const doc = {};
 // doc[`${changeEvent.ns.coll}Id`] = counter.seq_val;
-const updateRes = await targetCollection.updateOne({\_id: docId},{ $set: {[`${changeEvent.ns.coll}Id`]: parseInt(counter.seq_val) }});
+doc.id = parseInt(counter.seq_val);
+// const updateRes = await targetCollection.updateOne({\_id: docId},{ $set: {[`${changeEvent.ns.coll}Id`]: parseInt(counter.seq_val) }};
+  const updatedRes = await targetCollection.updateOne({_id: docId}, { $set: doc });
   console.log(`Updated ${JSON.stringify(changeEvent.ns)} with counter ${counter.seq_val} result: ${JSON.stringify(updateRes)}`);
 
 };
