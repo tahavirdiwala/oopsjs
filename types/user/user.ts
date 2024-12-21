@@ -1,6 +1,8 @@
-import { Document, Model } from "mongoose";
+import { Document } from "mongoose";
+import { TStatic } from "../statics/static";
 
 type TUser = Document & {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -14,11 +16,11 @@ type TUserChangePassword = {
   newPassword: string;
 };
 
-type TUserModel = Model<TUser> & {
-  findBy(field: Partial<TUser>): Promise<{
-    user: Exclude<TUser, "password">;
-    password: string;
-  }>;
+type TSeparateUser = {
+  user: Exclude<TUser, "password">;
+  password: string;
 };
+
+type TUserModel = TStatic<TUser, TSeparateUser>;
 
 export { TUser, TUserChangePassword, TUserModel };
