@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload, VerifyCallback } from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { PassWordConfig } from "../lib/constant";
 import { env } from "../lib/env";
@@ -18,9 +18,12 @@ const hashField = async (password: string) => {
   return await bcrypt.hash(password, PassWordConfig.Range);
 };
 
-function verifyToken(token: string): jwt.JwtPayload | string {
+function verifyToken<T = void>(
+  token: string,
+  cb?: VerifyCallback<JwtPayload | string>
+) {
   try {
-    return jwt.verify(token, env.JwtSecret);
+    return jwt.verify(token, env.JwtSecret, cb) as T;
   } catch (error) {
     throw error;
   }
