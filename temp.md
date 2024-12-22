@@ -1,6 +1,9 @@
-MONGO_URL = mongodb+srv://taha:ILeKvx6neUsLMm1n@cluster0.g4yzn.mongodb.net/oops
-
-PORT = 5000
-PREFIX =/api
+PORT = 8080
+PREFIX = /api
+JWT_EXPIRE= 12h
+JWT_SECRET= 56ab984hi
+JWT_PASSWORD_RESET_EXPIRE= 1h
 Controllers= /controllers/**/\*.controller.ts
 Middlewares= /middlewares/**/\*.middleware.ts
+SERVER_URL = http://localhost:8080/api
+CLIENT_URL_PIC= http://localhost:8080

@@ -31,7 +31,7 @@ const envKeys = [
   "JwtPasswordExpiry",
   "Email",
   "Password",
-  "ClientUrl",
+  "ServerUrl",
 ] as const;
 
 const envValues = [
@@ -45,7 +45,7 @@ const envValues = [
   "JWT_PASSWORD_RESET_EXPIRE",
   "EMAIL",
   "PASSWORD",
-  "CLIENT_URL",
+  "SERVER_URL",
 ];
 
 export { StatusCodes, PassWordConfig, JwtConfig, envKeys, envValues };

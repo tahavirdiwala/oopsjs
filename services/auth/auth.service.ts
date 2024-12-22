@@ -115,7 +115,7 @@ export class AuthService {
       if (getUser) {
         const token = createTokenFor(getUser.user, env.JwtPasswordExpiry);
 
-        const url = `${env.ClientUrl}/auth/reset-password/${token}`;
+        const url = `${env.ServerUrl}/auth/reset-password/${token}`;
 
         const transporter = nodemailer.createTransport(
           this.messages.transporter
