@@ -8,7 +8,7 @@ import { env } from "../lib/env";
  * @param {object} user - User fields object.
  * @param {string} expiry - expiry for jwt token.
  */
-const createTokenFor = (user: object, expiry: string) => {
+const createTokenFor = (user: any, expiry: string) => {
   return jwt.sign(user, env.JwtSecret, {
     expiresIn: expiry,
   });
