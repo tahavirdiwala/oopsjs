@@ -6,4 +6,3 @@ JWT_PASSWORD_RESET_EXPIRE= 1h
 Controllers= /controllers/**/\*.controller.ts
 Middlewares= /middlewares/**/\*.middleware.ts
 SERVER_URL = http://localhost:8080/api
-CLIENT_URL_PIC= http://localhost:8080
