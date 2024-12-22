@@ -31,8 +31,8 @@ export class AuthService {
         const user = await User.create(registerUserPayload);
         return this.handler.sendResponse(
           this.messages.register,
-          StatusCodes.CREATED,
-          user
+          user,
+          StatusCodes.CREATED
         );
       }
     } catch (error) {
@@ -58,11 +58,7 @@ export class AuthService {
             httpOnly: true,
           });
 
-          return this.handler.sendResponse(
-            this.messages.login,
-            StatusCodes.OK,
-            currentUser
-          );
+          return this.handler.sendResponse(this.messages.login, currentUser);
         } else {
           return this.handler.catchHandler(this.messages.inCorrectPassword);
         }

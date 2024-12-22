@@ -13,11 +13,7 @@ export class UserService {
   async getAllUsers(req: IUserAuthRequest) {
     try {
       const users = await User.find();
-      return this.handler.sendResponse(
-        this.messages.getAll,
-        StatusCodes.OK,
-        users
-      );
+      return this.handler.sendResponse(this.messages.getAll, users);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
@@ -26,7 +22,7 @@ export class UserService {
   async getUser(_id: string) {
     try {
       const user = await User.findOne({ _id });
-      return this.handler.sendResponse(this.messages.get, StatusCodes.OK, user);
+      return this.handler.sendResponse(this.messages.get, user);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }

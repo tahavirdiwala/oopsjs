@@ -5,8 +5,8 @@ import { CustomError } from "./custom-error.service";
 class ResponseHandlers {
   sendResponse<T>(
     message: string,
-    statusCode: number = StatusCodes.OK,
-    data?: T
+    data?: T,
+    statusCode: number = StatusCodes.OK
   ) {
     return { statusCode, message, data };
   }

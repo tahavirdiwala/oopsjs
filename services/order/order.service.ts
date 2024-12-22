@@ -15,8 +15,8 @@ export class OrderService {
       const order = await Order.create(payload);
       return this.handler.sendResponse(
         this.messages.add,
-        StatusCodes.CREATED,
-        order
+        order,
+        StatusCodes.CREATED
       );
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -26,11 +26,7 @@ export class OrderService {
   async getAllOrders() {
     try {
       const orders = await Order.find();
-      return this.handler.sendResponse(
-        this.messages.getAll,
-        StatusCodes.OK,
-        orders
-      );
+      return this.handler.sendResponse(this.messages.getAll, orders);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
@@ -40,11 +36,7 @@ export class OrderService {
     try {
       const order = await Order.findOne({ _id });
 
-      return this.handler.sendResponse(
-        this.messages.get,
-        StatusCodes.OK,
-        order
-      );
+      return this.handler.sendResponse(this.messages.get, order);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
@@ -75,8 +67,8 @@ export class OrderService {
       const orders = await Order.insertMany(payload);
       return this.handler.sendResponse(
         this.messages.addBulk,
-        StatusCodes.CREATED,
-        orders
+        orders,
+        StatusCodes.CREATED
       );
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -95,10 +87,7 @@ export class OrderService {
 
       await Order.bulkWrite(operations);
 
-      return this.handler.sendResponse(
-        this.messages.updateBulk,
-        StatusCodes.OK
-      );
+      return this.handler.sendResponse(this.messages.updateBulk);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
@@ -108,10 +97,7 @@ export class OrderService {
     try {
       await Order.deleteMany({ _id: { $in: ids } });
 
-      return this.handler.sendResponse(
-        this.messages.deleteBulk,
-        StatusCodes.OK
-      );
+      return this.handler.sendResponse(this.messages.deleteBulk);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
     }
