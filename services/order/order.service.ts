@@ -4,6 +4,7 @@ import { ResponseHandlers } from "../responser/response-handlers";
 import Order from "../../models/order.model";
 import { TOrder } from "../../types/order/order";
 import { ResponseMessages } from "../../lib/constant/messages";
+import { getQueryIds } from "../common";
 
 @Service()
 export class OrderService {
@@ -93,9 +94,9 @@ export class OrderService {
     }
   }
 
-  async deleteBulkOrders(ids: string[]) {
+  async deleteBulkOrders(ids: string) {
     try {
-      await Order.deleteMany({ _id: { $in: ids } });
+      await Order.deleteMany({ id: { $in: getQueryIds(ids) } });
 
       return this.handler.sendResponse(this.messages.deleteBulk);
     } catch (error) {
