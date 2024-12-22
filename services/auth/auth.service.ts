@@ -54,7 +54,7 @@ export class AuthService {
           const token = createTokenFor(currentUser, withExpiry);
 
           res.cookie("jwt", token, {
-            maxAge: JwtConfig.MaxAge, // 1 day
+            maxAge: JwtConfig.MaxAge, // expiry till 1 day
             httpOnly: true,
           });
 
