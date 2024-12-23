@@ -11,6 +11,13 @@ export class OrderService {
   constructor(private handler: ResponseHandlers) {}
   private messages = ResponseMessages.order;
 
+  private async isOrderExist(_id: string, order = "Order") {
+    const orderById = await Order.findOne({ _id });
+    if (!orderById) {
+      return this.handler.catchHandler(`${order} with given id does not exist`);
+    }
+  }
+
   async addOrder(payload: TOrder) {
     try {
       const order = await Order.create(payload);
@@ -44,6 +51,7 @@ export class OrderService {
 
   async editOrder(_id: string, payload: TOrder) {
     try {
+      await this.isOrderExist(_id);
       await Order.findOneAndUpdate({ _id }, payload);
       return this.handler.sendResponse(this.messages.edit);
     } catch (error) {
@@ -53,6 +61,7 @@ export class OrderService {
 
   async deleteOrder(_id: string) {
     try {
+      await this.isOrderExist(_id);
       await Order.findOneAndDelete({ _id });
       return this.handler.sendResponse(this.messages.delete);
     } catch (error) {
