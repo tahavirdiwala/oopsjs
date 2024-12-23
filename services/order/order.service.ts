@@ -36,7 +36,6 @@ export class OrderService {
   async getOrder(_id: string) {
     try {
       const order = await Order.findOne({ _id });
-
       return this.handler.sendResponse(this.messages.get, order);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -46,7 +45,6 @@ export class OrderService {
   async editOrder(_id: string, payload: TOrder) {
     try {
       await Order.findOneAndUpdate({ _id }, payload);
-
       return this.handler.sendResponse(this.messages.edit);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -56,7 +54,6 @@ export class OrderService {
   async deleteOrder(_id: string) {
     try {
       await Order.findOneAndDelete({ _id });
-
       return this.handler.sendResponse(this.messages.delete);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -87,7 +84,6 @@ export class OrderService {
       }));
 
       await Order.bulkWrite(operations);
-
       return this.handler.sendResponse(this.messages.updateBulk);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
@@ -97,7 +93,6 @@ export class OrderService {
   async deleteBulkOrders(ids: string) {
     try {
       await Order.deleteMany({ id: { $in: getQueryIds(ids) } });
-
       return this.handler.sendResponse(this.messages.deleteBulk);
     } catch (error) {
       return this.handler.catchHandler(error as Error);
