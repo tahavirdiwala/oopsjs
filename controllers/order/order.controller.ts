@@ -55,7 +55,6 @@ export class UserController {
     return this.handler.responser(res, data);
   }
 
-  // async deleteBulkOrders(@Body() ids: string[], @Res() res: Response) {
   @Delete("/bulk")
   async deleteBulkOrders(@QueryParam("ids") ids: string, @Res() res: Response) {
     const data = await this.orderService.deleteBulkOrders(ids);
