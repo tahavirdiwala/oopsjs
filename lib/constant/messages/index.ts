@@ -56,6 +56,7 @@ const ResponseMessages = {
     updateBulk: `Bulk orders updated successfully`,
     deleteBulk: `Bulk orders deleted successfully`,
   },
+  default: "Something went wrong",
 } as const;
 
 export { ResponseMessages };
