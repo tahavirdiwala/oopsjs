@@ -17,7 +17,7 @@ class UtilityDecorators {
    */
   getEnvConfig(key: string): string {
     if (process.env[key]) return process.env[key];
-    else throw new Error("env key does not exist");
+    else throw new Error(`env with given ${key} does not exist`);
   }
 
   /**
