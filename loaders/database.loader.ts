@@ -56,6 +56,8 @@ class DatabaseFactory {
         return new MongoDbConnector();
       case "sql":
         return new SqlConnector();
+      default:
+        throw new Error("No such database type exist");
     }
   }
 }
