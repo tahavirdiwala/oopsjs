@@ -32,6 +32,7 @@ const envKeys = [
   "Email",
   "Password",
   "ServerUrl",
+  "DatabaseType",
 ] as const;
 
 const envValues = [
@@ -46,6 +47,7 @@ const envValues = [
   "EMAIL",
   "PASSWORD",
   "SERVER_URL",
+  "DATABASETYPE",
 ];
 
 export { StatusCodes, PassWordConfig, JwtConfig, envKeys, envValues };
