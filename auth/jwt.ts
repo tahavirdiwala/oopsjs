@@ -14,8 +14,8 @@ const createTokenFor = (user: any, expiry: string) => {
   });
 };
 
-const hashField = async (password: string) => {
-  return await bcrypt.hash(password, PassWordConfig.Range);
+const hashField = async (password: string, range = PassWordConfig.Range) => {
+  return await bcrypt.hash(password, range);
 };
 
 function verifyToken<T = void>(
