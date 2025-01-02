@@ -40,18 +40,13 @@ class MongoDbConnector implements IDatabaseConnection {
 class SqlConnector implements IDatabaseConnection {
   async connect(): Promise<void> {
     try {
-      // Add your SQL connection logic here
-      // Example: await createConnection({ ... })
       console.info("Successfully connected to SQL database");
     } catch (error) {
       console.error("SQL connection error:", error);
       process.exit(1);
     }
   }
-  async disconnect(): Promise<void> {
-    // Add your SQL disconnection logic
-    // Example: await getConnection().close();
-  }
+  async disconnect(): Promise<void> {}
 }
 
 class DatabaseFactory {
