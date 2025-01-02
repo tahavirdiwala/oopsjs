@@ -33,6 +33,12 @@ export class UserController {
     return this.handler.responser(res, data);
   }
 
+  @Get("/:id")
+  async get(@Res() res: Response, @Param("id") id: string) {
+    const data = await this.orderService.getOrder(id);
+    return this.handler.responser(res, data);
+  }
+
   @Put("/:id")
   async edit(
     @Param("id") id: string,

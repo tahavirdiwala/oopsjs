@@ -2,3 +2,18 @@
 {"level":"info","message":"Request completed GET /api/orders - 200","requestId":"30e91a59-0dac-4df0-acbd-1228d7b19e35","timestamp":"2024-12-20T09:58:11.887Z"}
 {"level":"info","message":"Incoming request GET /orders","requestId":"0bfc5e23-664f-4f27-afb6-748391df5c64","timestamp":"2024-12-20T09:59:42.020Z"}
 {"level":"info","message":"Request completed GET /api/orders - 200","requestId":"0bfc5e23-664f-4f27-afb6-748391df5c64","timestamp":"2024-12-20T09:59:42.022Z"}
+{"level":"info","message":"Incoming request GET /orders/67656dd9bd8e3838b8fb4347","requestId":"ee68793a-3676-49a2-be31-791ad84fd0a9","timestamp":"2025-01-02T11:55:08.658Z"}
+{"level":"info","message":"Request completed GET /api/orders/67656dd9bd8e3838b8fb4347 - 404","requestId":"ee68793a-3676-49a2-be31-791ad84fd0a9","timestamp":"2025-01-02T11:55:08.664Z"}
+{"level":"info","message":"Incoming request GET /orders/","requestId":"06a7ffd5-6bab-443d-ae04-3019765b036d","timestamp":"2025-01-02T11:55:40.946Z"}
+{"level":"info","message":"Request completed GET /api/orders/ - 200","requestId":"06a7ffd5-6bab-443d-ae04-3019765b036d","timestamp":"2025-01-02T11:55:40.946Z"}
+{"level":"info","message":"Incoming request GET /orders/","requestId":"e931027e-0b91-4158-bedc-c31a0f1f03fc","timestamp":"2025-01-02T11:56:30.939Z"}
+{"level":"info","message":"Request completed GET /api/orders/ - 200","requestId":"e931027e-0b91-4158-bedc-c31a0f1f03fc","timestamp":"2025-01-02T11:56:30.940Z"}
+{"level":"info","message":"Incoming request GET /orders/67656dd9bd8e3838b8fb4347","requestId":"99536c65-b4a6-4fc1-ba5f-bf5498784652","timestamp":"2025-01-02T11:56:34.115Z"}
+{"level":"info","message":"Request completed GET /api/orders/67656dd9bd8e3838b8fb4347 - 200","requestId":"99536c65-b4a6-4fc1-ba5f-bf5498784652","timestamp":"2025-01-02T11:56:34.116Z"}
+{"level":"info","message":"Incoming request GET /orders/67656dd9bd8e3838b8fb4347","requestId":"b2ad8fa2-de70-4fb4-9de7-637d73301cdd","timestamp":"2025-01-02T11:58:23.453Z"}
+{"level":"info","message":"Request completed GET /api/orders/67656dd9bd8e3838b8fb4347 - 200","requestId":"b2ad8fa2-de70-4fb4-9de7-637d73301cdd","timestamp":"2025-01-02T11:58:24.016Z"}
+{"level":"info","message":"Incoming request GET /orders/67656dd9bd8e3838b8fb4347","requestId":"79ca243f-8285-4f74-a870-add8cfe557e7","timestamp":"2025-01-02T12:03:35.827Z"}
+{"level":"info","message":"Request completed GET /api/orders/67656dd9bd8e3838b8fb4347 - 200","requestId":"79ca243f-8285-4f74-a870-add8cfe557e7","timestamp":"2025-01-02T12:03:35.830Z"}
+{"level":"info","message":"Incoming request GET /orders/67656dd9bd8e3838b8fb4347","requestId":"bf9d6b10-a805-4e32-9de1-103873195bb4","timestamp":"2025-01-02T12:04:22.491Z"}
+{"level":"info","message":"Incoming request GET /orders/67656dd9bd8e3838b8fb4347","requestId":"872233b5-b19e-4229-8171-c8ce80ccad86","timestamp":"2025-01-02T12:04:24.863Z"}
+{"level":"info","message":"Request completed GET /api/orders/67656dd9bd8e3838b8fb4347 - 200","requestId":"872233b5-b19e-4229-8171-c8ce80ccad86","timestamp":"2025-01-02T12:04:24.864Z"}

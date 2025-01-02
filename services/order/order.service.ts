@@ -42,6 +42,7 @@ export class OrderService {
 
   async getOrder(_id: string) {
     try {
+      await this.isOrderExist({ _id });
       const order = await Order.findOne({ _id });
       return this.handler.sendResponse(this.messages.get, order);
     } catch (error) {
